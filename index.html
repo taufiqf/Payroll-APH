@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10233f">
+<title>Payroll Anis Pet House</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Fredoka:wght@400;500;600;700&family=UnifrakturMaguntia&display=swap');
+:root{--ink:#28394e;--blue:#9fd4ef;--deep:#587e9d;--pale:#eaf7ff;--bg:#f5fbff;--card:#fcfeff;--muted:#71869a;--line:#d5eaf6;--green:#668b79;--red:#b42318}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 8% 8%,#e0f3ff 0,transparent 34%),radial-gradient(circle at 92% 84%,#e8e8ff 0,transparent 30%),var(--bg);color:var(--ink);font:15px/1.55 'Fredoka',system-ui,sans-serif}
+header{background:linear-gradient(135deg,#dff4ff,#c4e6f8 55%,#e8eaff);color:#344b63;padding:25px 18px 31px;border-bottom:1px solid #c8e4f4;position:relative;overflow:hidden}
+header:after{content:"✦ ♡ ✦";position:absolute;right:22px;bottom:12px;font-size:25px;letter-spacing:10px;color:#fff9;transform:rotate(-8deg)}
+.wrap{max-width:980px;margin:auto}.brandline{display:flex;align-items:center;gap:18px}.mascot{width:112px;height:112px;flex:0 0 112px;background:#f7fcff;border:3px solid #fff;border-radius:28px;box-shadow:0 5px 18px #537c9b25;padding:5px}.mascot svg{width:100%;height:100%}
+header .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#587e9d;font-weight:700}
+h1{font-family:'UnifrakturMaguntia','Bungee Shade',cursive;font-size:clamp(31px,5.5vw,48px);line-height:1.05;margin:8px 0;color:#405d79;text-shadow:2px 2px 0 #fff,3px 3px 0 #a9d7ef}
+header p{margin:8px 0 0;color:#58738b;max-width:650px}
+main{max-width:980px;margin:-16px auto 40px;padding:0 14px;position:relative}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tab{border:1px solid var(--line);background:#fcfeff;padding:10px 16px;border-radius:14px;font-weight:700;cursor:pointer;color:#526e87;box-shadow:0 3px 10px #537c9b10}.tab.active{background:var(--deep);color:white;border-color:var(--deep)}
+.panel{display:none}.panel.active{display:block}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{background:rgba(252,254,255,.96);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 7px 22px #537c9b12;margin-bottom:14px}
+h2{font-family:'UnifrakturMaguntia','Fredoka',cursive;font-size:25px;margin:0 0 14px;color:#587e9d}h3{font-size:14px;margin:0 0 10px;color:#587e9d}
+.field{margin-bottom:12px}.field:last-child{margin-bottom:0}label{display:block;font-size:13px;font-weight:700;color:#58738b;margin-bottom:5px}
+input,select{width:100%;padding:11px 12px;border:1px solid #c9e3f2;border-radius:12px;background:#fff;color:#28394e;font:inherit;min-width:0}
+input:focus,select:focus{outline:3px solid #d9f0ff;border-color:#86bfdf}
+.hint{font-size:12px;color:var(--muted);margin-top:4px}
+.result{background:linear-gradient(145deg,#eaf7ff,#f4f4ff);border:1px solid #cfe8f7;border-radius:17px;padding:16px}
+.total{font-size:30px;font-weight:700;color:#466b8a;letter-spacing:-.03em}
+.rows{display:grid;gap:8px;margin-top:12px}.row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed #c9e3f2;padding-bottom:7px}.row:last-child{border:0;padding:0}.row span:first-child{color:#71869a}
+.pill{display:inline-block;padding:4px 10px;border-radius:999px;background:#d9effc;color:#466b8a;font-size:11px;font-weight:700;letter-spacing:.05em}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}button{border:0;border-radius:12px;padding:11px 15px;font:inherit;font-weight:700;cursor:pointer}.primary{background:#719cba;color:white}.primary:hover{background:#587e9d}.secondary{background:#e4f3fc;color:#466b8a}
+.note{font-size:12px;color:#71869a;margin-top:12px}.warning{border-left:4px solid #86bfdf;background:#eef8ff;padding:12px 14px;border-radius:10px;color:#526e87;font-size:12px}
+footer{max-width:980px;margin:0 auto 30px;padding:0 14px;color:#71869a;font-size:12px}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.card{padding:15px}.total{font-size:27px}.mascot{width:88px;height:88px;flex-basis:88px}.brandline{gap:12px}}
+@media(prefers-reduced-motion:no-preference){.card{transition:transform .18s ease,box-shadow .18s ease}.card:hover{transform:translateY(-2px);box-shadow:0 10px 26px #537c9b18}}
+@media print{header{padding:10px;background:white}.tabs,.actions{display:none}body{background:white}.card{box-shadow:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="brandline"><div class="mascot" aria-label="Orange cat wearing a pastel blue hoodie and black sunglasses"><svg viewBox="0 0 160 160" role="img" aria-hidden="true"><defs><linearGradient id="fur" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffbf70"/><stop offset="1" stop-color="#e98236"/></linearGradient><linearGradient id="hood" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dff5ff"/><stop offset="1" stop-color="#8fc8e9"/></linearGradient></defs><path d="M24 58 19 19q-1-9 8-3l30 23M136 58l5-39q1-9-8-3L103 39" fill="url(#fur)" stroke="#5a4566" stroke-width="5" stroke-linejoin="round"/><path d="M31 55Q35 23 80 23t49 32v51q-4 36-49 36t-49-36Z" fill="url(#fur)" stroke="#5a4566" stroke-width="5"/><path d="M18 91q3-34 27-42 14-5 35-5t35 5q24 8 27 42l-10 42q-4 13-18 13H39q-14 0-18-13Z" fill="url(#hood)" stroke="#5a4566" stroke-width="5"/><path d="M43 65q16-12 37-12t37 12" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/><path d="M42 73h29q7 0 7 7v8q0 8-8 8H49q-9 0-9-9v-7q0-7 2-7Zm47 0h29q2 0 2 7v7q0 9-9 9H90q-8 0-8-8v-8q0-7 7-7Z" fill="#171521" stroke="#171521" stroke-width="4"/><path d="M78 81h5M38 81h-6m90 0h6" stroke="#171521" stroke-width="5" stroke-linecap="round"/><path d="M72 108q8 8 16 0" fill="none" stroke="#7c4938" stroke-width="4" stroke-linecap="round"/><path d="M80 101q-6-7-10 0 0 7 10 10 10-3 10-10-4-7-10 0" fill="#f48bb7"/><path d="M60 119q20 10 40 0" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M64 137v10m32-10v10" stroke="#5a4566" stroke-width="4" stroke-linecap="round"/><path d="m15 53-7-5m137 5 7-5" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg></div><div><div class="eyebrow">✦ ANIS PET HOUSE SEMENYIH ✦</div><h1>Payroll Anis Pet House</h1><p>Gothic kawaii payroll companion ♡ Kira gaji pekerja tetap & part-timer, OT, rest day dan public holiday.</p></div></div></div></header>
+<main>
+<div class="tabs" role="tablist">
+<button class="tab active" data-tab="permanent">Pekerja tetap</button>
+<button class="tab" data-tab="parttime">Part-timer</button>
+</div>
+
+<section id="permanent" class="panel active">
+<div class="grid">
+<div class="card">
+<h2>Maklumat pekerja tetap</h2>
+<div class="field"><label for="basic">Gaji asas bulanan (RM)</label><input id="basic" type="number" min="0" step=".01" value="3000"></div>
+<div class="field"><label for="allowance">Elaun bulanan (RM)</label><input id="allowance" type="number" min="0" step=".01" value="300"></div>
+<div class="field"><label for="normalHours">Jam kerja normal sehari</label><input id="normalHours" type="number" min=".5" max="24" step=".5" value="8"></div>
+<div class="field"><label for="workDays">Hari bekerja seminggu</label><select id="workDays"><option value="5">5 hari</option><option value="5.5" selected>5.5 hari</option><option value="6">6 hari</option></select></div>
+<div class="field"><label for="other">Tambahan / potongan lain (RM)</label><input id="other" type="number" step=".01" value="0"><div class="hint">Masukkan nilai positif untuk tambahan atau negatif untuk potongan.</div></div>
+</div>
+<div class="card">
+<h2>Kehadiran & bayaran tambahan</h2>
+<div class="field"><label for="otHours">OT hari bekerja biasa (jam)</label><input id="otHours" type="number" min="0" step=".25" value="0"></div>
+<div class="field"><label for="restHours">Jam bekerja pada hari rehat</label><input id="restHours" type="number" min="0" step=".25" value="0"><div class="hint">Kiraan asas: ≤ separuh jam normal = 0.5 hari; lebih separuh hingga jam normal = 1 hari.</div></div>
+<div class="field"><label for="restOt">OT selepas waktu normal pada hari rehat (jam)</label><input id="restOt" type="number" min="0" step=".25" value="0"></div>
+<div class="field"><label for="phDays">Bilangan public holiday bekerja (hari normal)</label><input id="phDays" type="number" min="0" step=".5" value="0"></div>
+<div class="field"><label for="phOt">OT selepas waktu normal pada public holiday (jam)</label><input id="phOt" type="number" min="0" step=".25" value="0"></div>
+</div>
+</div>
+<div class="card">
+<h2>Ringkasan gaji</h2>
+<div class="result">
+<div class="pill">ANGGARAN GAJI KASAR</div>
+<div class="total" id="permTotal">RM 3,300.00</div>
+<div class="rows" id="permRows"></div>
+</div>
+<div class="actions"><button class="primary" onclick="resetPermanent()">Reset pekerja tetap</button><button class="secondary" onclick="window.print()">Cetak / Simpan PDF</button></div>
+<p class="note">Formula indikatif: ORP = gaji bulanan ÷ 26; HRP = ORP ÷ jam kerja normal sehari. OT biasa 1.5×, OT hari rehat 2×, OT PH 3×. Elaun diletakkan berasingan dan tidak dimasukkan ke asas OT secara automatik.</p>
+</div>
+</section>
+
+<section id="parttime" class="panel">
+<div class="grid">
+<div class="card">
+<h2>Maklumat part-timer</h2>
+<div class="field"><label for="dayRate">Kadar satu hari penuh (RM)</label><input id="dayRate" type="number" min="0" step=".01" value="70"></div>
+<div class="field"><label for="fullDayHours">Jam satu hari penuh</label><input id="fullDayHours" type="number" min=".5" max="24" step=".5" value="8"></div>
+<div class="field"><label for="agreedHours">Jam kerja dipersetujui untuk shift ini</label><input id="agreedHours" type="number" min="0" max="24" step=".25" value="8"><div class="hint">Contoh: jika dipanggil 3 jam, masukkan 3 jam. Bayaran asas diprorata daripada RM70/8 jam.</div></div>
+<div class="field"><label for="actualHours">Jumlah jam sebenar bekerja</label><input id="actualHours" type="number" min="0" max="24" step=".25" value="8"></div>
+</div>
+<div class="card">
+<h2>Pengiraan part-timer</h2>
+<div class="field"><label for="ptFullTimeHours">Had jam normal pekerja sepenuh masa sehari</label><input id="ptFullTimeHours" type="number" min=".5" max="24" step=".5" value="8"><div class="hint">Digunakan untuk bezakan lebihan jam biasa dan OT statutori. Ubah ikut jadual sebenar tempat kerja.</div></div>
+<div class="field"><label for="ptExtra">Tambahan / potongan lain (RM)</label><input id="ptExtra" type="number" step=".01" value="0"></div>
+<div class="warning">Bagi pekerja separa masa yang dilindungi Peraturan-Peraturan Kerja (Pekerja Separa Masa) 2010, kerja melebihi jam yang dipersetujui tetapi belum melebihi jam normal pekerja sepenuh masa lazimnya dibayar pada kadar sejam biasa. Lebihan selepas jam normal pekerja sepenuh masa dibayar sekurang-kurangnya 1.5×. Semak status pekerja dan kontrak sebenar.</div>
+</div>
+</div>
+<div class="card">
+<h2>Ringkasan bayaran part-timer</h2>
+<div class="result">
+<div class="pill">ANGGARAN BAYARAN SHIFT</div>
+<div class="total" id="ptTotal">RM 70.00</div>
+<div class="rows" id="ptRows"></div>
+</div>
+<div class="actions"><button class="primary" onclick="resetParttime()">Reset part-timer</button><button class="secondary" onclick="window.print()">Cetak / Simpan PDF</button></div>
+<p class="note">Kiraan asas menganggap RM70 untuk 8 jam. Jam biasa diprorata mengikut kadar RM70 ÷ 8. Jam melebihi shift dipersetujui sehingga had sepenuh masa dikira pada kadar biasa; jam selepas had tersebut dikira 1.5×.</p>
+</div>
+</section>
+</main>
+<footer>
+<strong>Nota penting:</strong> Ini alat anggaran payroll, bukan nasihat undang-undang atau sistem payroll berkanun. Kelayakan dan kadar sebenar bergantung pada Akta Kerja 1955, peraturan pekerja separa masa, jenis hari rehat/cuti umum, kontrak, waktu kerja biasa yang sah dan komponen upah yang berkenaan. Semak dengan Jabatan Tenaga Kerja atau pegawai payroll sebelum membuat bayaran.
+</footer>
+<script>
+const $=id=>document.getElementById(id), num=id=>Math.max(0,Number($(id).value)||0), money=x=>'RM '+x.toLocaleString('en-MY',{minimumFractionDigits:2,maximumFractionDigits:2});
+function line(label,value){return `<div class="row"><span>${label}</span><strong>${money(value)}</strong></div>`}
+function calcPermanent(){
+ const basic=num('basic'), allowance=num('allowance'), h=num('normalHours')||8, orp=basic/26, hrp=orp/h;
+ const ot=num('otHours')*hrp*1.5;
+ const restH=num('restHours'), restPay=restH===0?0:(restH<=h/2?orp*.5:orp);
+ const restOT=num('restOt')*hrp*2;
+ const ph=num('phDays')*orp*2, phOT=num('phOt')*hrp*3, other=Number($('other').value)||0;
+ const total=basic+allowance+ot+restPay+restOT+ph+phOT+other;
+ $('permTotal').textContent=money(total);
+ $('permRows').innerHTML=line('Gaji asas',basic)+line('Elaun',allowance)+line(`OT biasa (${num('otHours')} jam × 1.5)`,ot)+line('Kerja hari rehat',restPay)+line(`OT hari rehat (${num('restOt')} jam × 2)`,restOT)+line('Kerja public holiday (tambahan 2 hari)',ph)+line(`OT public holiday (${num('phOt')} jam × 3)`,phOT)+line('Tambahan / potongan lain',other);
+}
+function calcParttime(){
+ const rate=num('dayRate'), full=num('fullDayHours')||8, agreed=num('agreedHours'), actual=num('actualHours'), ft=num('ptFullTimeHours')||8;
+ const hourly=rate/full, base=Math.min(actual,agreed)*hourly;
+ const extraOrd=Math.max(0,Math.min(actual,ft)-agreed)*hourly;
+ const statutoryOT=Math.max(0,actual-Math.max(agreed,ft))*hourly*1.5;
+ const extra=Number($('ptExtra').value)||0, total=base+extraOrd+statutoryOT+extra;
+ $('ptTotal').textContent=money(total);
+ $('ptRows').innerHTML=line('Kadar asas sejam',hourly)+line(`Bayaran jam dipersetujui (${Math.min(actual,agreed)} jam)`,base)+line(`Lebihan hingga had sepenuh masa (${Math.max(0,Math.min(actual,ft)-agreed)} jam)`,extraOrd)+line(`OT selepas had sepenuh masa (${Math.max(0,actual-Math.max(agreed,ft))} jam × 1.5)`,statutoryOT)+line('Tambahan / potongan lain',extra);
+}
+function resetPermanent(){[['basic',3000],['allowance',300],['normalHours',8],['workDays',5.5],['other',0],['otHours',0],['restHours',0],['restOt',0],['phDays',0],['phOt',0]].forEach(([a,b])=>$(a).value=b);calcPermanent()}
+function resetParttime(){[['dayRate',70],['fullDayHours',8],['agreedHours',8],['actualHours',8],['ptFullTimeHours',8],['ptExtra',0]].forEach(([a,b])=>$(a).value=b);calcParttime()}
+document.querySelectorAll('input,select').forEach(el=>el.addEventListener('input',()=>{calcPermanent();calcParttime()}));
+document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===btn));document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('active',x.id===btn.dataset.tab))}));
+calcPermanent();calcParttime();
+</script>
+</body></html>
